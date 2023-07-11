@@ -16,9 +16,9 @@ exports.routesConfig = function (app, router) {
     userController.getMe,
   ]);
 
-  // router.get(url + "/stats", [
-  //   authMiddleware.validJWTNeeded,
-  //   authMiddleware.validStatus,
-  //   userController.allStats,
-  // ]);
+  router.get(`${config.app.apiPath}stats`, [
+    authMiddleware.validJWTNeeded,
+    authMiddleware.validStatus,
+    userController.allStats,
+  ]);
 };
