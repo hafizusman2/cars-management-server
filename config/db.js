@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+
+// Set the strictQuery option to false
+mongoose.set("strictQuery", false);
+
 const config = require("../config/config");
 const apiResponse = require("../common/api.response");
 
