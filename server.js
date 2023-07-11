@@ -14,7 +14,6 @@ const port = process.env.PORT || 5000;
 const connectDB = require("./config/db");
 const xss = require("xss");
 const html = xss('<script>alert("xss");</script>');
-console.log(html);
 
 const app = express();
 const router = express.Router();
