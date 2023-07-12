@@ -47,7 +47,7 @@ exports.register = async (req, res) => {
       const user = await User.create(params);
 
       // const token = helper.createJwtToken(user);
-      const text = `Welcome to the Cars Management System! \n\n Email: ${user.email} \n Password: ${password} \n Please Login with above credentials below link \n ${config.app.clientURL}/login`;
+      const text = `Welcome to the Cars Management System! \n\n Email: ${user.email} \n Password: ${password} \n Please Login with above credentials below link \n ${config.app.clientURL}/`;
       await sendEmail(
         user.email,
         "Welcome to the Cars Management System!",
