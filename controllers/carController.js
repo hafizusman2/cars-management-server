@@ -19,7 +19,7 @@ exports.addCar = async (req, res) => {
     title: ["required", "string", "max:50"],
     price: ["required", "numeric"],
     active: "boolean",
-    addedBy: ["required", `regex:${helper.objectIdRegex}`],
+    // addedBy: ["required", `regex:${helper.objectIdRegex}`],
   };
   const validation = new Validator(carData, rules);
   if (validation.fails()) {
@@ -31,13 +31,15 @@ exports.addCar = async (req, res) => {
       if (existingCar) {
         return apiResponse.fail(res, "Car already exists", 400);
       }
-      const user = await User.findById(carData.addedBy);
-      if (!user) {
-        return apiResponse.fail(res, "User not found", 404);
-      }
+      // const user = await User.findById(carData.addedBy);
+      // if (!user) {
+      //   return apiResponse.fail(res, "User not found", 404);
+      // }
 
-      if (user.status == 0)
-        return apiResponse.fail(res, "User is inactive", 400);
+      // if (user.status == 0)
+      //   return apiResponse.fail(res, "User is inactive", 400);
+
+      carData.addedBy = req.user.id;
 
       if (req.files.assets) {
         carData.assets = [];
@@ -79,7 +81,7 @@ exports.updateCar = async (req, res) => {
     title: ["string", "max:50"],
     price: ["numeric"],
     active: "boolean",
-    addedBy: [`regex:${helper.objectIdRegex}`],
+    // addedBy: [`regex:${helper.objectIdRegex}`],
   };
   const bodyValidation = new Validator(carData, rules);
 
@@ -97,13 +99,13 @@ exports.updateCar = async (req, res) => {
         if (existingCar) {
           return apiResponse.fail(res, "Car already exists", 400);
         }
-        const user = await User.findById(carData.addedBy);
-        if (!user) {
-          return apiResponse.fail(res, "User not found", 404);
-        }
+        // const user = await User.findById(carData.addedBy);
+        // if (!user) {
+        //   return apiResponse.fail(res, "User not found", 404);
+        // }
 
-        if (user.status == 0)
-          return apiResponse.fail(res, "User is inactive", 400);
+        // if (user.status == 0)
+        //   return apiResponse.fail(res, "User is inactive", 400);
         // if (car.addedBy != req.user.id)
         //   return apiResponse.fail(res, "You are not authorized", 400);
 
