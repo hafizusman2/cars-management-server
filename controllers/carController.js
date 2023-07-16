@@ -96,7 +96,7 @@ exports.updateCar = async (req, res) => {
         if (!car) return apiResponse.fail(res, "Car not found", 404);
 
         const existingCar = await Car.findOne({ regNo: carData.regNo });
-        if (existingCar) {
+        if (existingCar && existingCar._id != req.params.id) {
           return apiResponse.fail(res, "Car already exists", 400);
         }
         // const user = await User.findById(carData.addedBy);
